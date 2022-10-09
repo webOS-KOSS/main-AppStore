@@ -5,7 +5,7 @@ import Panels from "@enact/sandstone/Panels";
 import Tiles from "../views/Tiles";
 import css from "./App.module.less";
 
-const apps = ["a", "b", "c", "d", "e"];
+const apps = ["배달", "차량", "cctv", "가전제어", "운동보조"];
 
 const AppBase = kind({
   name: "App",
