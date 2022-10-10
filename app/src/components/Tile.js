@@ -1,13 +1,49 @@
 import kind from "@enact/core/kind";
 import Proptypes from "prop-types";
 import Button from "@enact/sandstone/Button";
-
 import css from "./Tile.module.less";
 import thumbnail from "../../icon.jpeg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import LS2Request from '@enact/webos/LS2Request';
 
-const Btn = () => {
+const bridge = new LS2Request();
+
+
+const Btn = ({app}) => {
   const [toggle, chToggle] = useState(false);
+  let app_name;
+  if(app == "배달") {
+    app_name = "com.delivery.app_1.0.0_all.ipk"
+  } else if (app == "차량") {
+    app_name = "com.registercar.app_1.0.0_all.ipk"
+  } else if (app == "cctv"){
+    app_name = "com.cctv.app_1.0.0_all.ipk"
+  } else if (app == "가전제어"){
+    app_name = "com.control.app_1.0.0_all.ipk"
+  } else if (app == "운동보조"){
+    app_name = "com.exercise.app_1.0.0_all.ipk"
+  }
+
+  useEffect(() => {
+    console.log(app)
+    if (toggle){
+      appInstall(app_name)
+    }
+  }, [toggle])
+
+  function appInstall(app) {
+		console.log("[install] " + app);
+		var lsRequest = {
+			service:"luna://com.appstore.app.service",
+			method:"install",
+			parameters: {"app" : app},
+			onSuccess: (msg) => {
+				console.log(msg.message);
+			},
+			onFailure: (msg) => {console.log(msg);console.log("error");},
+		}
+		bridge.send(lsRequest);
+  }
 
   return (
     <div className={css.btn}>
@@ -59,7 +95,7 @@ const TileBase = kind({
             <div className={css.appName}>{children}</div>
           </div>
           <div className={css.desc}>{descs[children]}</div>
-          <Btn />
+          <Btn app={children} />
         </div>
       </div>
     );

@@ -15,30 +15,9 @@ const Tiles = kind({
     close: Proptypes.func,
   },
 
-  handlers: {
-    close: () => {
-      const bridge = new LS2Request();
-      let params = {
-        id: "com.appstore.app",
-      };
-      let lsRequest = {
-        service: "luna://com.webos.service.applicationmanager",
-        method: "close",
-        parameter: params,
-        onSuccess: (msg) => {
-          console.log(msg);
-        },
-        onFailure: (err) => {
-          console.log(err);
-        },
-      };
-      bridge.send(lsRequest);
-    },
-  },
-
   render: ({ children, rest }) => (
     <Panel className={css.gnd} {...rest}>
-      <Header className={css.gnd} title="Home++ App Store" onClick={() => {}} />
+      <Header className={css.gnd} title="Home++ App Store"/>
       <Scroller direction="vertical">
         <Repeater childComponent={Tile} indexProp="index">
           {children}
