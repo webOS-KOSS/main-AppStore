@@ -4,7 +4,7 @@
   "vendor": "My Company",
   "type": "web",
   "main": "index.html",
-  "title": "app",
+  "title": "Home++ App Store",
   "icon": "icon.jpeg",
   "requiredPermissions": ["time.query", "activity.operation"]
 }

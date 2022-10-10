@@ -1,0 +1,10 @@
+{
+  "id": "com.appstore.app.service",
+  "description": "HelloWorld Service",
+  "services": [
+    {
+      "name": "com.appstore.app.service"
+    }
+  ],
+  "version": "0.0.1"
+}
